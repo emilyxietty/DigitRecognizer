@@ -8,3 +8,4 @@ pandas
 seaborn
 tensorflow
 opencv-python
+cv2
