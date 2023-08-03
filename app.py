@@ -34,11 +34,18 @@ def save_canvas_as_png(canvas_data):
     # image = Image.open(io.BytesIO(img_bytes))
     # return image
     # Convert the canvas data to a PNG image using base64 decoding
-    img_bytes = base64.b64decode(canvas_data.split(",")[1])
-    image = Image.open(io.BytesIO(img_bytes))
+    if not canvas_data.startswith("data:image/png;base64,"):
+        st.error("Invalid canvas data format.")
+        return
 
-    # Save the image to the specified file name
-    image.save(file_name)
+    try:
+        img_bytes = base64.b64decode(canvas_data.split(",")[1])
+        image = Image.open(io.BytesIO(img_bytes))
+    
+        # Save the image to the specified file name
+        image.save(file_name)
+    except Exception as e:
+        st.error("Error saving image:", e)
     
 def open_img(drawn_image):
     # Load the image
