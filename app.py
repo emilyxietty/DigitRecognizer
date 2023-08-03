@@ -1,6 +1,6 @@
-import streamlit as st
 from PIL import Image
-import streamlit_drawable_canvas as st_canvas
+import streamlit as st
+from streamlit_drawable_canvas import st_canvas
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -11,7 +11,6 @@ import tensorflow as tf
 import matplotlib.pyplot as plt
 import seaborn as sn
 import numpy as np
-import pandas as pd
 import math
 import datetime
 import platform
