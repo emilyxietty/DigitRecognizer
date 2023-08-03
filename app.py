@@ -1,4 +1,5 @@
 from PIL import Image
+from Pillow import Image
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
 
@@ -107,9 +108,9 @@ def main():
         if canvas_result.image_data is not None:            
             # Save the drawing as an image file (optional)
             image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
-            st.write(image)
+            # st.write(image)
 
-            image.save("drawn_image.png")
+            image.save("drawn_image.png", "png")
             img_array = open_img("drawn_image.png")
 
             model = keras.models.load_model("model.keras")
