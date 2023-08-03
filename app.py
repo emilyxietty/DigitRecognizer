@@ -45,6 +45,28 @@ def open_img(drawn_image):
     img_array = img_array.reshape(1, 28, 28, 1)
     return img_array
 
+def json_to_png(json_data, output_file):
+    try:
+        # Parse the JSON data
+        data = json.loads(json_data)
+
+        # Extract image information from the JSON data
+        width = data['width']
+        height = data['height']
+        pixels = data['pixels']
+
+        # Create an image from the pixel data
+        image = Image.new('RGB', (width, height))
+        image.putdata(pixels)
+
+        # Save the image as a PNG file
+        image.save(output_file, 'PNG')
+
+        print(f"Successfully converted JSON image to PNG: {output_file}")
+    except Exception as e:
+        print(f"Error converting JSON to PNG: {e}")
+
+
 def main():
     print_title()
     
@@ -86,8 +108,11 @@ def main():
         if canvas_result.image_data is not None:            
             # Save the drawing as an image file (optional)
             image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
+            
             image.save("drawn_image.png")
             img_array = open_img("drawn_image.png")
+
+            model = keras.models.load_model("model.keras")
 
             # Get the prediction
             prediction = model.predict(img_array)
