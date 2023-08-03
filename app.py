@@ -107,7 +107,8 @@ def main():
         if canvas_result.image_data is not None:            
             # Save the drawing as an image file (optional)
             image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
-            
+            st.write(image)
+
             image.save("drawn_image.png")
             img_array = open_img("drawn_image.png")
 
