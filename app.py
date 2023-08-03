@@ -88,6 +88,8 @@ def main():
             # Save the drawing as an image file (optional)
             image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
             # st.write(image)
+            st.image(image)
+
 
             image.save("drawn_image.png")
             # image.save("drawn_image", "png")
