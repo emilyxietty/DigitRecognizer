@@ -109,7 +109,7 @@ def main():
             image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
             # st.write(image)
 
-            image.save("drawn_image.png", "png")
+            image.save("drawn_image", "png")
             st.image("drawn_img.png")
             img_array = open_img("drawn_image.png")
 
