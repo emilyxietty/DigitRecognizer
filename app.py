@@ -86,7 +86,7 @@ def main():
     if st.button("Submit Drawing"):
         if canvas_result.image_data is not None:            
             # Save the drawing as an image file (optional)
-            image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
+            image = Image.fromarray(canvas_result.image_data, 'RGB')
             # st.write(image)
             st.image(image)
 
