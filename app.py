@@ -86,36 +86,36 @@ def main():
         st.write("You drew this:")
         st.image(canvas_result.image_data)
 
-    # Add a button to submit the drawing
-    if st.button("Submit Drawing"):
-        if canvas_result.image_data is not None:
-            # Save the drawing as an image file (optional)
-            image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
-            image.save("drawn_image.png")
-            img_array = open_img("drawn_image.png")
+    # # Add a button to submit the drawing
+    # if st.button("Submit Drawing"):
+    #     if canvas_result.image_data is not None:
+    #         # Save the drawing as an image file (optional)
+    #         image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
+    #         image.save("drawn_image.png")
+    #         img_array = open_img("drawn_image.png")
 
-            # Get the prediction
-            prediction = model.predict(img_array)
+    #         # Get the prediction
+    #         prediction = model.predict(img_array)
 
-            # The output of the model is a 10-element vector with the probabilities for each digit.
-            # Use argmax to get the digit with the highest probability.
-            predicted_digit = np.argmax(prediction)
-            print('The number is predicted to be: ', predicted_digit)
+    #         # The output of the model is a 10-element vector with the probabilities for each digit.
+    #         # Use argmax to get the digit with the highest probability.
+    #         predicted_digit = np.argmax(prediction)
+    #         print('The number is predicted to be: ', predicted_digit)
 
-            # Squeeze to remove single-dimensional entries from the shape of an array.
-            prediction = np.squeeze(prediction)
+    #         # Squeeze to remove single-dimensional entries from the shape of an array.
+    #         prediction = np.squeeze(prediction)
 
-            # Create a bar plot
-            plt.figure(figsize=(9, 3))
-            plt.bar(range(10), prediction)
-            plt.xlabel('Digits')
-            plt.ylabel('Probabilities')
-            plt.title('Predicted probabilities of Digits')
-            plt.xticks(range(10))
-            st.pyplot()
+    #         # Create a bar plot
+    #         plt.figure(figsize=(9, 3))
+    #         plt.bar(range(10), prediction)
+    #         plt.xlabel('Digits')
+    #         plt.ylabel('Probabilities')
+    #         plt.title('Predicted probabilities of Digits')
+    #         plt.xticks(range(10))
+    #         st.pyplot()
             
-        else:
-            st.warning("Please draw something before submitting.")
+    #     else:
+    #         st.warning("Please draw something before submitting.")
 
 if __name__ == "__main__":
     main()
