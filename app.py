@@ -133,7 +133,7 @@ def main():
             plt.ylabel('Probabilities')
             plt.title('Predicted probabilities of Digits')
             plt.xticks(range(10))
-            st.pyplot()
+            st.pyplot(plt)
             
         else:
             st.warning("Please draw something before submitting.")
