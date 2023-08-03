@@ -82,7 +82,7 @@ def main():
     stroke_color = st.sidebar.color_picker("Stroke color hex: ")
     bg_color = st.sidebar.color_picker("Background color hex: ", "#eee")
     
-    # realtime_update = st.sidebar.checkbox("Update in realtime", True)
+    realtime_update = st.sidebar.checkbox("Update in realtime", True)
 
     # Create a canvas component
     canvas_result = st_canvas(
