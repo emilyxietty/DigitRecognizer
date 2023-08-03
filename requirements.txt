@@ -1,6 +1,7 @@
 streamlit
 Pillow
 streamlit_drawable_canvas
+streamlit-drawable-canvas 
 matplotlib
 numpy
 pandas
