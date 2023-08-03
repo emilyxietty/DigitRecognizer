@@ -8,6 +8,7 @@ import pandas as pd
 import seaborn as sns
 
 import tensorflow as tf
+from tensorflow import keras
 import matplotlib.pyplot as plt
 import seaborn as sn
 import numpy as np
