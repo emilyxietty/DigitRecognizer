@@ -1,8 +1,7 @@
-import json
-
 from PIL import Image
 import streamlit as st
 from streamlit_drawable_canvas import st_canvas
+import cv2
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -89,23 +88,24 @@ def main():
         if canvas_result.image_data is not None:            
             # Save the drawing as an image file (optional)
             # Assuming that canvas_result.image_data is a JSON string representing the canvas data
-            canvas_data = json.loads(canvas_result.image_data)
+            # canvas_data = json.loads(canvas_result.image_data)
+            cv2.imwrite(f"drawn_image.png",  canvas_result.image_data)
             
             # Extract the image data as a numpy array
-            image_data = np.array(canvas_data['pixels'], dtype=np.uint8)
+            # image_data = np.array(canvas_data['pixels'], dtype=np.uint8)
             
             # Reshape the data to match the canvas dimensions (e.g., height x width x 3 for RGB image)
-            height = canvas_data['height']
-            width = canvas_data['width']
-            image_data = image_data.reshape(height, width, 3)
-            # image = Image.fromarray(canvas_result.image_data, 'RGB')
-            image = Image.fromarray(image_data, 'RGB')
+            # height = canvas_data['height']
+            # width = canvas_data['width']
+            # image_data = image_data.reshape(height, width, 3)
+            # # image = Image.fromarray(canvas_result.image_data, 'RGB')
+            # image = Image.fromarray(image_data, 'RGB')
 
             # st.write(image)
             st.image(image)
 
 
-            image.save("drawn_image.png")
+            # image.save("drawn_image.png")
             # image.save("drawn_image", "png")
             # st.image("drawn_img.png")
             img_array = open_img("drawn_image.png")
