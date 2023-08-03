@@ -28,6 +28,18 @@ def print_title():
 def print_credits():
     st.write("Dataset from: MNIST Handwritten Digit Dataset, with 60,000 digits for training and 10,000 digits for testing. Digits 0-9.")
 
+def save_canvas_as_png(canvas_data):
+    # Convert the canvas data to a PNG image using base64 decoding
+    # img_bytes = base64.b64decode(canvas_data.split(",")[1])
+    # image = Image.open(io.BytesIO(img_bytes))
+    # return image
+    # Convert the canvas data to a PNG image using base64 decoding
+    img_bytes = base64.b64decode(canvas_data.split(",")[1])
+    image = Image.open(io.BytesIO(img_bytes))
+
+    # Save the image to the specified file name
+    image.save(file_name)
+    
 def open_img(drawn_image):
     # Load the image
     img = Image.open(drawn_image)
@@ -63,9 +75,7 @@ def main():
     bg_image = st.sidebar.file_uploader("Background image:", type=["png", "jpg"])
     
     realtime_update = st.sidebar.checkbox("Update in realtime", True)
-    
-    
-    
+
     # Create a canvas component
     canvas_result = st_canvas(
         fill_color="rgba(255, 165, 0, 0.3)",  # Fixed fill color with some opacity
@@ -86,35 +96,37 @@ def main():
         st.image(canvas_result.image_data)
 
     # # Add a button to submit the drawing
-    # if st.button("Submit Drawing"):
-    #     if canvas_result.image_data is not None:
-    #         # Save the drawing as an image file (optional)
-    #         image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
-    #         image.save("drawn_image.png")
-    #         img_array = open_img("drawn_image.png")
+    if st.button("Submit Drawing"):
+        if canvas_result.image_data is not None:
+            image = save_canvas_as_png(canvas_result.image_data)
+            st.image(image, caption="Saved Image", use_column_width=True)
+            # Save the drawing as an image file (optional)
+            # image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
+            # image.save("drawn_image.png")
+            img_array = open_img("drawn_image.png")
 
-    #         # Get the prediction
-    #         prediction = model.predict(img_array)
+            # Get the prediction
+            prediction = model.predict(img_array)
 
-    #         # The output of the model is a 10-element vector with the probabilities for each digit.
-    #         # Use argmax to get the digit with the highest probability.
-    #         predicted_digit = np.argmax(prediction)
-    #         print('The number is predicted to be: ', predicted_digit)
+            # The output of the model is a 10-element vector with the probabilities for each digit.
+            # Use argmax to get the digit with the highest probability.
+            predicted_digit = np.argmax(prediction)
+            print('The number is predicted to be: ', predicted_digit)
 
-    #         # Squeeze to remove single-dimensional entries from the shape of an array.
-    #         prediction = np.squeeze(prediction)
+            # Squeeze to remove single-dimensional entries from the shape of an array.
+            prediction = np.squeeze(prediction)
 
-    #         # Create a bar plot
-    #         plt.figure(figsize=(9, 3))
-    #         plt.bar(range(10), prediction)
-    #         plt.xlabel('Digits')
-    #         plt.ylabel('Probabilities')
-    #         plt.title('Predicted probabilities of Digits')
-    #         plt.xticks(range(10))
-    #         st.pyplot()
+            # Create a bar plot
+            plt.figure(figsize=(9, 3))
+            plt.bar(range(10), prediction)
+            plt.xlabel('Digits')
+            plt.ylabel('Probabilities')
+            plt.title('Predicted probabilities of Digits')
+            plt.xticks(range(10))
+            st.pyplot()
             
-    #     else:
-    #         st.warning("Please draw something before submitting.")
+        else:
+            st.warning("Please draw something before submitting.")
 
 if __name__ == "__main__":
     main()
