@@ -110,6 +110,7 @@ def main():
             # st.write(image)
 
             image.save("drawn_image.png", "png")
+            st.image("drawn_img.png")
             img_array = open_img("drawn_image.png")
 
             model = keras.models.load_model("model.keras")
