@@ -27,25 +27,6 @@ def print_title():
 
 def print_credits():
     st.write("Dataset from: MNIST Handwritten Digit Dataset, with 60,000 digits for training and 10,000 digits for testing. Digits 0-9.")
-
-def save_canvas_as_png(canvas_data):
-    # Convert the canvas data to a PNG image using base64 decoding
-    # img_bytes = base64.b64decode(canvas_data.split(",")[1])
-    # image = Image.open(io.BytesIO(img_bytes))
-    # return image
-    # Convert the canvas data to a PNG image using base64 decoding
-    if not canvas_data.startswith("data:image/png;base64,"):
-        st.error("Invalid canvas data format.")
-        return
-
-    try:
-        img_bytes = base64.b64decode(canvas_data.split(",")[1])
-        image = Image.open(io.BytesIO(img_bytes))
-    
-        # Save the image to the specified file name
-        image.save(file_name)
-    except Exception as e:
-        st.error("Error saving image:", e)
     
 def open_img(drawn_image):
     # Load the image
@@ -102,12 +83,10 @@ def main():
 
     # # Add a button to submit the drawing
     if st.button("Submit Drawing"):
-        if canvas_result.image_data is not None:
-            image = save_canvas_as_png(canvas_result.image_data)
-            st.image(image, caption="Saved Image", use_column_width=True)
+        if canvas_result.image_data is not None:            
             # Save the drawing as an image file (optional)
-            # image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
-            # image.save("drawn_image.png")
+            image = Image.fromarray(canvas_result.image_data.astype('uint8'), 'RGB')
+            image.save("drawn_image.png")
             img_array = open_img("drawn_image.png")
 
             # Get the prediction
