@@ -125,7 +125,7 @@ def main():
 
             # Squeeze to remove single-dimensional entries from the shape of an array.
             prediction = np.squeeze(prediction)
-
+            
             # Create a bar plot
             plt.figure(figsize=(9, 3))
             plt.bar(range(10), prediction)
@@ -133,6 +133,8 @@ def main():
             plt.ylabel('Probabilities')
             plt.title('Predicted probabilities of Digits')
             plt.xticks(range(10))
+            
+            # Display the plot using st.pyplot()
             st.pyplot(plt)
             
         else:
