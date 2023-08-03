@@ -1,6 +1,6 @@
 import streamlit as st
 from PIL import Image
-import streamlit-drawable-canvas as st_canvas
+import streamlit_drawable_canvas as st_canvas
 
 import matplotlib.pyplot as plt
 import numpy as np
