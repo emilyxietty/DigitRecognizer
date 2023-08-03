@@ -86,6 +86,16 @@ def main():
     if st.button("Submit Drawing"):
         if canvas_result.image_data is not None:            
             # Save the drawing as an image file (optional)
+            # Assuming that canvas_result.image_data is a JSON string representing the canvas data
+            canvas_data = json.loads(canvas_result.image_data)
+            
+            # Extract the image data as a numpy array
+            image_data = np.array(canvas_data['pixels'], dtype=np.uint8)
+            
+            # Reshape the data to match the canvas dimensions (e.g., height x width x 3 for RGB image)
+            height = canvas_data['height']
+            width = canvas_data['width']
+            image_data = image_data.reshape(height, width, 3)
             # image = Image.fromarray(canvas_result.image_data, 'RGB')
             image = Image.fromarray(image_data, 'RGB')
 
