@@ -50,13 +50,7 @@ def main():
     print_title()
 
     # Create a canvas to draw on
-    canvas_result = st_canvas(
-        fill_color="rgb(200, 200, 200)",  # Background color of the canvas
-        stroke_width=5,  # Width of the stroke while drawing
-        stroke_color="rgb(0, 0, 0)",  # Color of the stroke
-        update_streamlit=True,
-        height=200  # Height of the canvas in pixels
-    )
+    canvas_result = st_canvas(fill_color="rgb(200, 200, 200)", stroke_width=5, stroke_color="rgb(0, 0, 0)", update_streamlit=True, height=200)
 
     # Display the image drawn on the canvas
     if canvas_result.image_data is not None:
