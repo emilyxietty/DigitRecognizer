@@ -1,8 +1,3 @@
-import datetime
-import math
-import platform
-
-import cv2
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -140,8 +135,13 @@ def main():
     # # Add a button to submit the drawing
     if st.button(":mag: Check Number"):
         if canvas_result.image_data is not None:
-            img = cv2.imwrite(f"drawn_image.png",  canvas_result.image_data)
+            # img = cv2.imwrite(f"drawn_image.png",  canvas_result.image_data)
+            img = Image.fromarray(canvas_result.image_data)
+            # Save the image to a file
+            img.save("drawn_image.png")
+
             img_array = open_img("drawn_image.png")
+
             # model = keras.models.load_model("digits_recognition_cnn.h5")
             # prediction = model.predict(img_array)
             model = keras.models.load_model("digits_recognition_cnn.h5")
