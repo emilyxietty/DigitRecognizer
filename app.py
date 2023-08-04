@@ -13,6 +13,9 @@ from PIL import Image
 from streamlit_drawable_canvas import st_canvas
 from tensorflow import keras
 
+# print(cv2.__version__)
+# print(cv2.__file__)
+# print(libGL.__file__)
 
 def print_title():
     st.title(':round_pushpin: Handwritten Digit Classifier')
